@@ -1,5 +1,5 @@
 import { createApplication } from '@angular/platform-browser';
-import { Component, computed, inject, NgZone, provideZoneChangeDetection } from '@angular/core';
+import { Component, computed, provideZoneChangeDetection } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { createCustomElement } from '@angular/elements';
 
@@ -15,8 +15,6 @@ import { Observable } from 'rxjs';
     <div>globalThis.___valueObs (obs): {{ valueObs$ | async }}</div>`,
 })
 class MfComponent {
-  zone = inject(NgZone);
-
   // NOT reacting to shell changes
   value = computed(() => `${(globalThis as any).___value()}`);
 
