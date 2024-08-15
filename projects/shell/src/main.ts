@@ -28,9 +28,11 @@ export class ShellComponent {
   interval$ = interval(1000);
 
   constructor() {
+    // attaching objs to global scope
     (globalThis as any).___value = signal(0);
     (globalThis as any).___valueObs = this.interval$;
 
+    // elements loading
     Promise.all([
       this.mfLoader.loadElement({ elementId: 'mf1', tag: 'app-mf1' }),
       this.mfLoader.loadElement({ elementId: 'mf2', tag: 'app-mf2' }),

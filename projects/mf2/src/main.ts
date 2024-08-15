@@ -5,8 +5,6 @@ import { createCustomElement } from '@angular/elements';
 
 import { Observable } from 'rxjs';
 
-import { runInZone } from './run-in-zone.operator';
-
 @Component({
   selector: 'app-mf2',
   standalone: true,
@@ -18,8 +16,12 @@ import { runInZone } from './run-in-zone.operator';
 })
 class MfComponent {
   zone = inject(NgZone);
+
+  // NOT reacting to shell changes
   value = computed(() => `${(globalThis as any).___value()}`);
-  valueObs$ = ((globalThis as any).___valueObs as Observable<number>).pipe(runInZone(this.zone));
+
+  // reacting to shell changes
+  valueObs$ = ((globalThis as any).___valueObs as Observable<number>);
 }
 
 (async () => {
