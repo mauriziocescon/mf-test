@@ -36,7 +36,7 @@ export class ShellComponent {
 
 bootstrapApplication(ShellComponent, {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
   ],
 })
   .catch((err) => console.error(err));

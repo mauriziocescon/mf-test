@@ -16,7 +16,7 @@ class MfComponent {
 (async () => {
   const app = await createApplication({
     providers: [
-      provideZoneChangeDetection({ eventCoalescing: true }),
+      provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
     ],
   });
   const element = createCustomElement(MfComponent, { injector: app.injector });
