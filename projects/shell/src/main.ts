@@ -8,7 +8,6 @@ import { MfLoaderService } from './mf-loader.service';
 
 @Component({
   selector: 'app-shell',
-  standalone: true,
   imports: [AsyncPipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `

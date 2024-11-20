@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mf2',
-  standalone: true,
   imports: [AsyncPipe],
   template: `
     <h3>Mf2 (zoneless)</h3>
