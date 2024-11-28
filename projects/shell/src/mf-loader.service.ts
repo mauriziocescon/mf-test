@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class MfLoaderService {
 
-  loadElement(metadata: { elementId: string, tag: string }): Promise<void> {
+  loadElement(metadata: { elementId: string, tag: string }) {
     if (!customElements.get(metadata.tag)) {
       const url = `elements/${metadata.elementId}/index.js`;
 
