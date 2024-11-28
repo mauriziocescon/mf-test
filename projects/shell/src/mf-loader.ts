@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class MfLoaderService {
+export class MfLoader {
 
   loadElement(metadata: { elementId: string, tag: string }) {
     if (!customElements.get(metadata.tag)) {

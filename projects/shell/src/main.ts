@@ -4,7 +4,7 @@ import { AsyncPipe } from '@angular/common';
 
 import { interval } from 'rxjs';
 
-import { MfLoaderService } from './mf-loader.service';
+import { MfLoader } from './mf-loader';
 
 @Component({
   selector: 'app-shell',
@@ -20,7 +20,7 @@ import { MfLoaderService } from './mf-loader.service';
     <app-mf2></app-mf2>`,
 })
 export class ShellComponent {
-  mfLoader = inject(MfLoaderService);
+  mfLoader = inject(MfLoader);
   value = computed(() => `${(globalThis as any).___value()}`);
 
   intervalId = setInterval(() => (globalThis as any).___value.update((v: number) => v + 1), 1000);
