@@ -15,10 +15,10 @@ import { Observable } from 'rxjs';
 })
 class MfComponent {
   // NOT reacting to shell changes
-  value = computed(() => `${(globalThis as any).___value()}`);
+  protected readonly value = computed(() => `${(globalThis as any).___value()}`);
 
   // reacting to shell changes
-  valueObs$ = ((globalThis as any).___valueObs as Observable<number>);
+  protected readonly valueObs$ = ((globalThis as any).___valueObs as Observable<number>);
 }
 
 (async () => {

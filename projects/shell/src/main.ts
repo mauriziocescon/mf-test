@@ -20,11 +20,11 @@ import { MfLoader } from './mf-loader';
     <app-mf2></app-mf2>`,
 })
 export class ShellComponent {
-  mfLoader = inject(MfLoader);
-  value = computed(() => `${(globalThis as any).___value()}`);
+  private readonly mfLoader = inject(MfLoader);
+  protected readonly value = computed(() => `${(globalThis as any).___value()}`);
 
-  intervalId = setInterval(() => (globalThis as any).___value.update((v: number) => v + 1), 1000);
-  interval$ = interval(1000);
+  protected readonly intervalId = setInterval(() => (globalThis as any).___value.update((v: number) => v + 1), 1000);
+  protected readonly interval$ = interval(1000);
 
   constructor() {
     // attaching objs to global scope

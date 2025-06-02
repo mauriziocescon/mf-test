@@ -1,5 +1,5 @@
 import { createApplication } from '@angular/platform-browser';
-import { Component, computed, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { Component, computed, provideZonelessChangeDetection } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { createCustomElement } from '@angular/elements';
 
@@ -15,15 +15,15 @@ import { Observable } from 'rxjs';
 })
 class MfComponent {
   // NOT reacting to shell changes
-  value = computed(() => `${(globalThis as any).___value()}`);
+  protected readonly value = computed(() => `${(globalThis as any).___value()}`);
 
   // reacting to shell changes
-  valueObs$ = ((globalThis as any).___valueObs as Observable<number>);
+  protected readonly valueObs$ = ((globalThis as any).___valueObs as Observable<number>);
 }
 
 (async () => {
   const app = await createApplication({
-    providers: [provideExperimentalZonelessChangeDetection()],
+    providers: [provideZonelessChangeDetection()],
   });
   const element = createCustomElement(MfComponent, { injector: app.injector });
   customElements.define('app-mf2', element);
