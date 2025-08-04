@@ -1,5 +1,5 @@
 import { createApplication } from '@angular/platform-browser';
-import { Component, computed, provideZoneChangeDetection } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, provideZoneChangeDetection } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { createCustomElement } from '@angular/elements';
 
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-mf1',
   imports: [AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <h3>Mf1 (zone.js)</h3>
     <div>globalThis.___value (signal): {{ value() }}</div>
@@ -18,7 +19,7 @@ class MfComponent {
   protected readonly value = computed(() => `${(globalThis as any).___value()}`);
 
   // reacting to shell changes
-  protected readonly valueObs$ = ((globalThis as any).___valueObs as Observable<number>);
+  protected readonly valueObs$ = ((globalThis as any).___valueObs as Observable<string>);
 }
 
 (async () => {

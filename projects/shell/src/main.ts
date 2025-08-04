@@ -1,14 +1,24 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, inject, provideZoneChangeDetection, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+  provideZoneChangeDetection,
+  signal,
+} from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 
 import { interval } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { MfLoader } from './mf-loader';
 
 @Component({
   selector: 'app-shell',
   imports: [AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <h3>Shell (attaching signal / obs to globalThis)</h3>
@@ -23,12 +33,15 @@ export class ShellComponent {
   private readonly mfLoader = inject(MfLoader);
   protected readonly value = computed(() => `${(globalThis as any).___value()}`);
 
-  protected readonly intervalId = setInterval(() => (globalThis as any).___value.update((v: number) => v + 1), 1000);
-  protected readonly interval$ = interval(1000);
+  protected readonly interval$ = interval(1000)
+    .pipe(
+      map(v => `${v}`),
+      tap(v => (globalThis as any).___value.set(v)),
+    );
 
   constructor() {
     // attaching objs to global scope
-    (globalThis as any).___value = signal(0);
+    (globalThis as any).___value = signal('-');
     (globalThis as any).___valueObs = this.interval$;
 
     // elements loading
