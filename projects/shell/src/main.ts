@@ -1,13 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  CUSTOM_ELEMENTS_SCHEMA,
-  inject,
-  provideZoneChangeDetection,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, CUSTOM_ELEMENTS_SCHEMA, inject, signal } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 
 import { interval } from 'rxjs';
@@ -52,6 +44,4 @@ export class ShellComponent {
   }
 }
 
-bootstrapApplication(ShellComponent, {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true })],
-}).catch((err) => console.error(err));
+bootstrapApplication(ShellComponent).catch((err) => console.error(err));
